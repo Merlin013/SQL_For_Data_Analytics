@@ -19,3 +19,8 @@ FROM employees
 -- Using this information we can extract the domain name in email. 
 SELECT SUBSTRING(email, POSITION('@' IN email) +1) as domain_name
 FROM employees
+
+-- COALESCE function
+-- Is used to basically replace NULL or empty cells with some data or string that we can choose
+SELECT COALESCE(email, 'NONE') as email
+FROM employees
