@@ -36,3 +36,39 @@ WHERE department IN (SELECT department FROM departments WHERE division = 'Kids')
 AND hire_date > ALL (SELECT hire_date FROM employees WHERE department ='Maintenance')
 
 
+
+/*Creating a new table*/
+
+CREATE table dupes (id integer, name varchar(10));
+
+INSERT INTO dupes VALUES (1, 'FRANK');
+INSERT INTO dupes VALUES (2, 'FRANK');
+INSERT INTO dupes VALUES (3, 'ROBERT');
+INSERT INTO dupes VALUES (4, 'ROBERT');
+INSERT INTO dupes VALUES (5, 'SAM');
+INSERT INTO dupes VALUES (6, 'FRANK');
+INSERT INTO dupes VALUES (7, 'PETER');
+
+SELECT * FROM dupes
+
+/*Assignment
+Write query that returns only unique names*/
+
+SELECT min(id), name
+FROM dupes
+GROUP BY name
+
+DELETE FROM dupes 
+WHERE id NOT IN (SELECT min(id)
+FROM dupes
+GROUP BY name)
+
+DROP TABLE dupes
+
+
+SELECT * FROM employees
+
+SELECT ROUND(AVG (salary)) 
+FROM employees 
+WHERE salary NOT IN ((SELECT MAX(salary) FROM employees), 
+(SELECT MIN(salary) FROM employees))
